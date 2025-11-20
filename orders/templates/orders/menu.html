@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Menu - Foodies Hub{% endblock %}
+
+{% block content %}
+<div class="container menu-container">
+    <h1 class="text-center mb-4">🍽 Our Delicious Menu</h1>
+    <div class="row g-4">
+        {% for item in items %}
+        <div class="col-md-4 d-flex">
+            <div class="card shadow-lg w-100 h-100 d-flex flex-column">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" style="height:200px; object-fit:cover;">
+                {% else %}
+                    <img src="https://source.unsplash.com/400x300/?{{ item.name }}" class="card-img-top" alt="{{ item.name }}" style="height:200px; object-fit:cover;">
+                {% endif %}
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.category }}</p>
+                    <h6 class="text-success">₹{{ item.price }}</h6>
+                    <form method="POST" action="{% url 'order_page' %}" class="mt-auto">
+                         {% csrf_token %}
+                         <input type="hidden" name="item_id" value="{{ item.id }}">
+                         <input type="hidden" name="quantity" value="1">
+                         <a href="{% url 'order_page' %}?item_id={{ item.id }}" class="btn btn-custom mt-auto">Order Now</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-end mt-4">
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-sm">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-secondary btn-sm">Signup</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

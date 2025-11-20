@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Place Order - Foodies Hub{% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3 mt-4">
+    <h2 class="text-center mb-4">📝 Confirm Your Order</h2>
+
+    <form method="POST" action="" class="p-4 rounded shadow" style="background-color: rgba(255,255,255,0.95);">
+        {% csrf_token %}
+
+        <!-- Auto-filled username -->
+        <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input type="text" name="name" class="form-control" value="{{ user.username }}" readonly>
+        </div>
+
+        <!-- Auto-filled email/phone -->
+        <div class="mb-3">
+            <label class="form-label">Phone / Email</label>
+            <input type="text" name="phone" class="form-control" value="{{ user.email }}" readonly>
+        </div>
+
+        <!-- Selected Item -->
+        {% if selected_item %}
+        <div class="mb-3">
+            <label class="form-label">Item</label>
+            <input type="text" class="form-control" value="{{ selected_item.name }} - ₹{{ selected_item.price }}" readonly>
+            <input type="hidden" name="item_id" value="{{ selected_item.id }}">
+        </div>
+        {% endif %}
+
+        <!-- Quantity -->
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control">
+        </div>
+
+        <!-- Bill -->
+        {% if total_bill %}
+        <div class="mb-3">
+            <h5>Total Bill: <span class="text-success">₹{{ total_bill }}</span></h5>
+        </div>
+        {% endif %}
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-success w-100">✅ Place Order</button>
+    </form>
+</div>
+{% endblock %}
