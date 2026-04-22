@@ -44,7 +44,6 @@ The project was developed to demonstrate real-world web application development 
 ---
 ### Login Page
 
-![Login]
 <img width="1515" height="725" alt="image" src="https://github.com/user-attachments/assets/8a4b6dcf-0ad5-40d7-af97-239caf66bec1" />
 
 
@@ -53,7 +52,7 @@ Secure login and registration forms for customer accounts.
 ---
 ### Menu Page
 
-![Menu Page]
+
 <img width="1704" height="760" alt="image" src="https://github.com/user-attachments/assets/a0d8a68d-0fb3-4d9e-99be-c2f6269abce1" />
 
 Customers browse all available food items with photos, names, prices, and an Add to Cart button.
